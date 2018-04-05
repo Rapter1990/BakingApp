@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nestedScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/recipe_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/recipe_name_padding"
+            android:textSize="@dimen/recipe_name_size"
+            android:textStyle="bold"
+            android:gravity="center"
+            tools:text="Brownies" />
+
+        <LinearLayout
+            android:id="@+id/recipe_ingredients"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/recipe_ingredients_marginBottom"
+            android:layout_marginLeft="@dimen/recipe_ingredients_marginLeft"
+            android:layout_marginRight="@dimen/recipe_ingredients_marginRight"
+            android:orientation="vertical"
+            android:padding="@dimen/recipe_ingredients_padding">
+
+            <TextView
+                android:id="@+id/recipe_ingredients_heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/recipe_ingredients_heading_marginBottom"
+                android:layout_marginLeft="@dimen/recipe_ingredients_heading_marginLeft"
+                android:textSize="@dimen/recipe_ingredients_heading_text_size"
+                android:textStyle="bold"
+                tools:text="@string/recipe_ingredients_heading" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recipe_ingredients_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/recyclerview_ingredients_marginLeft"
+                android:layout_marginRight="@dimen/recyclerview_ingredients_marginRight" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/recipe_steps"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/recipe_steps_margin"
+            android:orientation="vertical"
+            android:padding="@dimen/recipe_steps_padding">
+
+            <TextView
+                android:id="@+id/recipe_steps_heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/recipe_steps_marginLeft"
+                android:textSize="@dimen/recipe_steps_heading_size"
+                android:textStyle="bold"
+                tools:text="@string/recipe_steps_heading" />
+
+            <TextView
+                android:id="@+id/recipe_steps_sub_heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/recipe_steps_marginBottom"
+                android:layout_marginLeft="@dimen/recipe_steps_marginLeft"
+                android:textSize="@dimen/recipe_steps_sub_heading_size"
+                android:textStyle="italic"
+                tools:text="@string/recipe_steps_sub_heading" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recipe_steps_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/recyclerview_steps_marginLeft"
+                android:layout_marginRight="@dimen/recyclerview_steps_marginRight" />
+
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

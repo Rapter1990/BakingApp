@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">BakingApp</string>
+    <string name="error_main">No network connection. Error Loading Recipes</string>
+    <string name="recipe_ingredients_heading">Ingredients</string>
+    <string name="recipe_steps_heading">Steps</string>
+    <string name="recipe_steps_sub_heading">Click each step to show detail information</string>
+    <string name="button_step_text">Next Step</string>
+
+
+</resources>

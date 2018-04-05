@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="recipe_card_name_size">22sp</dimen>
+    <dimen name="item_ingredient_size">18sp</dimen>
+    <dimen name="item_step_size">18sp</dimen>
+
+    <dimen name="recipe_name_size">20sp</dimen>
+    <dimen name="recipe_name_padding">12dp</dimen>
+    <dimen name="recipe_ingredients_marginBottom">8dp</dimen>
+    <dimen name="recipe_ingredients_marginLeft">8dp</dimen>
+    <dimen name="recipe_ingredients_marginRight">8dp</dimen>
+    <dimen name="recipe_ingredients_padding">8dp</dimen>
+
+    <dimen name="recipe_ingredients_heading_marginBottom">8dp</dimen>
+    <dimen name="recipe_ingredients_heading_marginLeft">8dp</dimen>
+    <dimen name="recipe_ingredients_heading_text_size">16sp</dimen>
+
+
+    <dimen name="recyclerview_ingredients_marginLeft">8dp</dimen>
+    <dimen name="recyclerview_ingredients_marginRight">8dp</dimen>
+
+    <dimen name="recipe_steps_margin">8dp</dimen>
+    <dimen name="recipe_steps_padding">8dp</dimen>
+    <dimen name="recipe_steps_marginLeft">8dp</dimen>
+    <dimen name="recipe_steps_heading_size">16sp</dimen>
+    <dimen name="recipe_steps_marginBottom">8dp</dimen>
+    <dimen name="recipe_steps_sub_heading_size">12sp</dimen>
+
+    <dimen name="recyclerview_steps_marginLeft">8dp</dimen>
+    <dimen name="recyclerview_steps_marginRight">8dp</dimen>
+
+    <dimen name="recipe_steps_detail_marginBottom">8dp</dimen>
+    <dimen name="recipe_steps_detail_marginLeft">8dp</dimen>
+    <dimen name="recipe_steps_detail_marginRight">8dp</dimen>
+    <dimen name="recipe_steps_detail_marginTop">8dp</dimen>
+
+    <dimen name="step_description_size">16sp</dimen>
+    <dimen name="step_description_padding">8dp</dimen>
+
+
+</resources>
