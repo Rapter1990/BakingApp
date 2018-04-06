@@ -25,6 +25,8 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
     // TODO 182 ) Defining currentStep as RecipeStep
     private RecipeStep currentStep;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,13 +35,8 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
         // TODO 181 ) Defining ButterKnife to perceive textview and button.
         ButterKnife.bind(this);
 
-        Bundle extras = getIntent().getExtras();
-        currentStep = extras.getParcelable("CURRENT_RECIPE_STEP");
-
 
     }
-
-
 
 
 }
