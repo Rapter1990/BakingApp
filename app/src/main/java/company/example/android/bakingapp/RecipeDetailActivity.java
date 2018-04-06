@@ -1,6 +1,7 @@
 package company.example.android.bakingapp;
 
 import android.content.Intent;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -25,8 +26,9 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeSte
     // TODO 169 ) Defining selectedStep for defining the steps of recipe
     private RecipeStep selectedStep;
 
-    // TODO 170 ) Defining stepDetailFragment for designing layout
+    // TODO 173 ) Defining stepDetailFragment for designing layout
     private RecipeStepsFragment stepDetailFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeSte
             twoPane = savedInstanceState.getBoolean("twoPane");
         }
 
+        // CONTINUE STEP 174
 
     }
 

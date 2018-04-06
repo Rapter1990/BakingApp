@@ -79,8 +79,8 @@ public class RecipeStepsFragment extends Fragment implements StepsAdapter.StepsA
         recipeNameTextView.setText(recipe.getName());
 
         // TODO 134 ) Getting ingredient and steps list and assign them to arraylist
-        ArrayList<String> ingredientList = new ArrayList<String>();
-        ArrayList<RecipeStep> recipeStepsList = new ArrayList<RecipeStep>();
+        ArrayList<String> ingredientList = recipe.getIngredients();
+        ArrayList<RecipeStep> recipeStepsList = recipe.getSteps();
 
         // TODO 135 ) Creating adapter for ingredient and steps
         ingredientsAdapter = new IngredientsAdapter(getContext(),ingredientList);
