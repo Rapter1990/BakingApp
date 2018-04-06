@@ -66,7 +66,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeAdap
 
         holder.recipeNameTextview.setText(recipeName);
 
-        if(recipeImageUrl == null){
+        if(recipeImageUrl == ""){
             // Like "Nutella Pie" -> "nutellepie"
             String imageDrawableResourceName = recipeName.replaceAll("\\s+", "").toLowerCase();
             int imageResourceId = mContext.getResources().getIdentifier(

@@ -5,6 +5,6 @@
     android:id="@+id/recipe_step_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:name="company.example.android.bakingapp.RecipeDetailActivity">
+    android:name="company.example.android.bakingapp.fragments.RecipeStepsFragment">
 
 </fragment>
