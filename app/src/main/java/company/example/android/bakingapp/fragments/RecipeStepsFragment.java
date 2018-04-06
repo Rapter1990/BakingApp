@@ -1,6 +1,6 @@
 package company.example.android.bakingapp.fragments;
 
-import android.app.Fragment;
+import 	android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -83,10 +83,9 @@ public class RecipeStepsFragment extends Fragment implements StepsAdapter.StepsA
         ArrayList<RecipeStep> recipeStepsList = new ArrayList<RecipeStep>();
 
         // TODO 135 ) Creating adapter for ingredient and steps
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            ingredientsAdapter = new IngredientsAdapter(getContext(),ingredientList);
-            stepsAdapter = new StepsAdapter(getContext(),recipeStepsList,this);
-        }
+        ingredientsAdapter = new IngredientsAdapter(getContext(),ingredientList);
+        stepsAdapter = new StepsAdapter(getContext(),recipeStepsList,this);
+
 
         // TODO 136 ) Designing layout for RecyclerViews with recipes' ingredients and steps
         recipeIngredientsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

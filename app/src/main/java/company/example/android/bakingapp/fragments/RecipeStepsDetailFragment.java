@@ -1,6 +1,6 @@
 package company.example.android.bakingapp.fragments;
 
-import android.app.Fragment;
+import 	android.support.v4.app.Fragment;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
@@ -67,6 +67,9 @@ public class RecipeStepsDetailFragment extends Fragment{
 
         // TODO 151 ) Defining butterknife to perceive each elements defined by bindView
         ButterKnife.bind(this,rootView);
+
+
+
 
         return null;
     }
@@ -150,5 +153,5 @@ public class RecipeStepsDetailFragment extends Fragment{
     }
 
 
-    // CONTINUE STEP 169
+
 }
