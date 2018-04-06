@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.Rec
         // TODO 122 ) Starting intent including detail information about recipe according to recipe position
         Intent recipeInformationDetailActivityIntent = new Intent(this, RecipeDetailActivity.class);
         Bundle recipeBundle = new Bundle();
-        recipeBundle.putParcelable("RECIPE_DETAIL_INFORMATION",recipeBundle);
+        recipeBundle.putParcelable("RECIPE_DETAIL_INFORMATION",recipe);
         recipeInformationDetailActivityIntent.putExtras(recipeBundle);
         startActivity(recipeInformationDetailActivityIntent);
     }
