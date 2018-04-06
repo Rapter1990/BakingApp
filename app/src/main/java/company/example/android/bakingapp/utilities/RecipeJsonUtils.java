@@ -128,7 +128,7 @@ public class RecipeJsonUtils {
                 for(int ingredientIndex=0;ingredientIndex<ingredients.length();ingredientIndex++){
 
                     // TODO 59 ) Defining JSON object of Ingredient
-                    JSONObject ingredientObject = (JSONObject) ingredients.get(i);
+                    JSONObject ingredientObject = (JSONObject) ingredients.get(ingredientIndex);
 
                     // TODO 60 ) Defining ingredient's attributes of JSON object
                     String quantity = ingredientObject.getString(RECIPE_INGREDIENTS_QUANTITY);
@@ -147,7 +147,7 @@ public class RecipeJsonUtils {
                 for(int stepIndex=0;stepIndex<ingredients.length();stepIndex++){
 
                     // TODO 64 ) Defining JSON object of step
-                    JSONObject stepObject = (JSONObject) steps.get(i);
+                    JSONObject stepObject = (JSONObject) steps.get(stepIndex);
 
                     // TODO 65 ) Defining steps' attributes of JSON object
                     String stepID = stepObject.getString(RECIPE_STEPS_ID);
