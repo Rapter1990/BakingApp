@@ -50,7 +50,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeSte
             twoPane = savedInstanceState.getBoolean("twoPane");
         }
 
-        // CONTINUE STEP 174
+        // CONTINUE STEP 183
 
     }
 
@@ -72,5 +72,10 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeSte
         Intent recipeStepDetailActivityIntent = new Intent(this, RecipeStepDetailActivity.class);
         recipeStepDetailActivityIntent.putExtras(extras);
         startActivity(recipeStepDetailActivityIntent);
+    }
+
+    // TODO 183 ) Defining  getCurrentStep for getting RecipeStep from Stepdetail
+    public RecipeStep getCurrentStep() {
+        return selectedStep;
     }
 }

@@ -144,7 +144,7 @@ public class RecipeJsonUtils {
                 }
 
                 // TODO  63 ) Showing stepIndex of Recipe Object via loop
-                for(int stepIndex=0;stepIndex<ingredients.length();stepIndex++){
+                for(int stepIndex=0;stepIndex<steps.length();stepIndex++){
 
                     // TODO 64 ) Defining JSON object of step
                     JSONObject stepObject = (JSONObject) steps.get(stepIndex);

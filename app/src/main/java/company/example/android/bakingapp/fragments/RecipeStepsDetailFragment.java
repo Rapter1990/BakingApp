@@ -1,6 +1,6 @@
 package company.example.android.bakingapp.fragments;
 
-import 	android.support.v4.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,8 +17,10 @@ import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import company.example.android.bakingapp.R;
+import company.example.android.bakingapp.RecipeDetailActivity;
 import company.example.android.bakingapp.data.RecipeStep;
 import company.example.android.bakingapp.utilities.ExpoMediaPlayerUtils;
+import company.example.android.bakingapp.utilities.NetworkUtils;
 import timber.log.Timber;
 
 /**
@@ -26,7 +28,7 @@ import timber.log.Timber;
  */
 
 // TODO 142 )  Creating RecipeStepsDetailFragment class for connecting with recipe_steps_detail_fragment as a visual perspective
-public class RecipeStepsDetailFragment extends Fragment{
+public class RecipeStepsDetailFragment extends Fragment {
 
     // TODO 143 ) Defining a LOG_TAG
     private static final String LOG_TAG = RecipeStepsDetailFragment.class.getSimpleName();
@@ -53,6 +55,12 @@ public class RecipeStepsDetailFragment extends Fragment{
     // TODO 161 ) Defining PLAYER_STATUE String variable to determine the current position of SimpleExoPlayer for Bundle
     private static final String PLAYER_STATUE = "player_current_position";
 
+    // TODO 185 ) Defining videoURL
+    private Uri videoUri = null;
+
+    // TODO 187 ) Defining thumbnailUrl
+    String thumbnailUrl = null;
+
 
     // TODO 148 ) Creating onCreateView to design the fragment involving steps with its video
     @Nullable
@@ -63,15 +71,39 @@ public class RecipeStepsDetailFragment extends Fragment{
         int layoutFragment = R.layout.recipe_steps_detail_fragment;
 
         // TODO 150 ) Creating a view to inflate that fragment
-        final View rootView = inflater.inflate(layoutFragment,container,false);
+        final View rootView = inflater.inflate(layoutFragment, container, false);
 
         // TODO 151 ) Defining butterknife to perceive each elements defined by bindView
-        ButterKnife.bind(this,rootView);
+        ButterKnife.bind(this, rootView);
 
+        // TODO 183 ) Defining  RecipeStep from detail activity
+        recipeStep = new RecipeDetailActivity().getCurrentStep();
 
+        // TODO 184 ) Setting step detail description to textview
+        stepDescriptionTextView.setText(recipeStep.getDescription());
 
+        // TODO 186 ) Defining videoUri
+        videoUri = Uri.parse(recipeStep.getVideoURL());
 
-        return null;
+        // TODO 188 ) Defining thumbnailUrl
+        thumbnailUrl = recipeStep.getThumbnailURL().trim();
+
+        // TODO 189 ) Checking whether thumbnailUrl is empty or not
+        if (thumbnailUrl.isEmpty() && videoUri == null) {
+            simpleExoPlayerView.setDefaultArtwork(BitmapFactory.decodeResource
+                    (getResources(), R.drawable.novideoavailable));
+        }else{
+            // TODO 190 ) Initialize the Media Session.
+            ExpoMediaPlayerUtils.initializeMediaSession(getActivity(), exoPlayer);
+            // TODO 191 ) Initialize the player.
+            if (videoUri != null) {
+                exoPlayer = ExpoMediaPlayerUtils.initializePlayer(videoUri, getActivity(), exoPlayer);
+                simpleExoPlayerView.setPlayer(exoPlayer);
+                Timber.d(LOG_TAG + " / Player initialized");
+            }
+        }
+
+        return rootView;
     }
 
 
@@ -83,17 +115,17 @@ public class RecipeStepsDetailFragment extends Fragment{
         Timber.i("%s / onResume Called", LOG_TAG);
 
         // TODO 153 ) Checking whether SimpleExoPlayer is null
-        if(exoPlayer == null){
+        if (exoPlayer == null) {
 
             // TODO 154 )  Initialize the Media Session .
             ExpoMediaPlayerUtils.initializeMediaSession(getActivity(), exoPlayer);
 
             // TODO 155 ) Checking whether video step of recipe is valid or not
-            if(recipeStep.getVideoURL() !=null){
+            if (recipeStep.getVideoURL() != null) {
                 Uri videoUrl = Uri.parse(recipeStep.getVideoURL());
                 exoPlayer = ExpoMediaPlayerUtils.initializePlayer(videoUrl, getActivity(), exoPlayer);
                 Timber.i("%s / ExpoMediaPlayer initialized", LOG_TAG);
-            }else {
+            } else {
                 simpleExoPlayerView.setDefaultArtwork(BitmapFactory.decodeResource
                         (getResources(), R.drawable.novideoavailable));
             }
@@ -101,11 +133,11 @@ public class RecipeStepsDetailFragment extends Fragment{
             // TODO 156 ) Setting SimpleExoPlayer to simpleExoPlayerView
             simpleExoPlayerView.setPlayer(exoPlayer);
 
-        // TODO 157 ) Checking whether SimpleExoPlayer is not null to deteriming its current position
-        }else{
-            if(videoPlayerCurrentPosition != 0){
+            // TODO 157 ) Checking whether SimpleExoPlayer is not null to deteriming its current position
+        } else {
+            if (videoPlayerCurrentPosition != 0) {
                 exoPlayer.seekTo(videoPlayerCurrentPosition);
-            }else{
+            } else {
                 exoPlayer.seekTo(0);
             }
 
@@ -139,7 +171,7 @@ public class RecipeStepsDetailFragment extends Fragment{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if(savedInstanceState != null) {
+        if (savedInstanceState != null) {
             videoPlayerCurrentPosition = savedInstanceState.getInt(PLAYER_STATUE);
         }
     }
@@ -149,9 +181,8 @@ public class RecipeStepsDetailFragment extends Fragment{
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         int lastVideoPlayerCurrentPosition = (int) exoPlayer.getCurrentPosition();
-        outState.putInt(PLAYER_STATUE,lastVideoPlayerCurrentPosition);
+        outState.putInt(PLAYER_STATUE, lastVideoPlayerCurrentPosition);
     }
-
 
 
 }

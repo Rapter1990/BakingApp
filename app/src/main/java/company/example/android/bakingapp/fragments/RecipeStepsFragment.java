@@ -43,6 +43,18 @@ public class RecipeStepsFragment extends Fragment implements StepsAdapter.StepsA
     @BindView(R.id.recipe_name)
     TextView recipeNameTextView;
 
+    // TODO 174 ) Giving a reference for TextView with Ingredient Heading
+    @BindView(R.id.recipe_ingredients_heading)
+    TextView recipeHeading;
+
+    // TODO 175 ) Giving a reference for TextView with Step Heading
+    @BindView(R.id.recipe_steps_heading)
+    TextView stepHeading;
+
+    // TODO 176 ) Giving a reference for TextView with Step Sub Heading
+    @BindView(R.id.recipe_steps_sub_heading)
+    TextView stepSubHeading;
+
     // TODO 138 ) Defining adapters for ingredient and step
     IngredientsAdapter ingredientsAdapter;
     StepsAdapter stepsAdapter;
@@ -77,6 +89,11 @@ public class RecipeStepsFragment extends Fragment implements StepsAdapter.StepsA
 
         // TODO 133 ) Assigning name to textview
         recipeNameTextView.setText(recipe.getName());
+
+        // TODO 177 ) Assigning headings of ingredient and step and subheading of step to textview
+        recipeHeading.setText(R.string.recipe_ingredients_heading);
+        stepHeading.setText(R.string.recipe_steps_heading);
+        stepSubHeading.setText(R.string.recipe_steps_sub_heading);
 
         // TODO 134 ) Getting ingredient and steps list and assign them to arraylist
         ArrayList<String> ingredientList = recipe.getIngredients();
