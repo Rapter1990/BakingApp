@@ -51,4 +51,5 @@ dependencies {
     androidTestCompile 'com.android.support.test:runner:1.0.1'
     compile 'com.android.support.test.espresso:espresso-idling-resource:3.0.1'
 
+
 }
