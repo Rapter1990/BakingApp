@@ -1,5 +1,6 @@
 package company.example.android.bakingapp.fragments;
 
+import android.content.Context;
 import 	android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -122,4 +123,11 @@ public class RecipeStepsFragment extends Fragment implements StepsAdapter.StepsA
         selectedListener.onStepSelected(currentStep);
     }
 
+
+    // TODO 192 ) Implementing selectedListener in onAttach method
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        selectedListener = (OnStepSelectedListener) context;
+    }
 }
