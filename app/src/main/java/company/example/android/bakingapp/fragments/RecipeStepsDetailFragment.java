@@ -18,6 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import company.example.android.bakingapp.R;
 import company.example.android.bakingapp.RecipeDetailActivity;
+import company.example.android.bakingapp.RecipeStepDetailActivity;
 import company.example.android.bakingapp.data.RecipeStep;
 import company.example.android.bakingapp.utilities.ExpoMediaPlayerUtils;
 import timber.log.Timber;
@@ -76,7 +77,7 @@ public class RecipeStepsDetailFragment extends Fragment {
         ButterKnife.bind(this, rootView);
 
         // TODO 183 ) Defining  RecipeStep from detail activity
-        recipeStep = ((RecipeDetailActivity) getActivity()).getCurrentStep();
+        recipeStep = ((RecipeStepDetailActivity) getActivity()).getCurrentStep();
 
         // TODO 184 ) Setting step detail description to textview
         stepDescriptionTextView.setText(recipeStep.getDescription());
@@ -182,6 +183,7 @@ public class RecipeStepsDetailFragment extends Fragment {
         int lastVideoPlayerCurrentPosition = (int) exoPlayer.getCurrentPosition();
         outState.putInt(PLAYER_STATUE, lastVideoPlayerCurrentPosition);
     }
+
 
 
 }
