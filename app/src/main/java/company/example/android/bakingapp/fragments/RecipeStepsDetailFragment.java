@@ -20,7 +20,6 @@ import company.example.android.bakingapp.R;
 import company.example.android.bakingapp.RecipeDetailActivity;
 import company.example.android.bakingapp.data.RecipeStep;
 import company.example.android.bakingapp.utilities.ExpoMediaPlayerUtils;
-import company.example.android.bakingapp.utilities.NetworkUtils;
 import timber.log.Timber;
 
 /**
@@ -77,7 +76,7 @@ public class RecipeStepsDetailFragment extends Fragment {
         ButterKnife.bind(this, rootView);
 
         // TODO 183 ) Defining  RecipeStep from detail activity
-        recipeStep = new RecipeDetailActivity().getCurrentStep();
+        recipeStep = ((RecipeDetailActivity) getActivity()).getCurrentStep();
 
         // TODO 184 ) Setting step detail description to textview
         stepDescriptionTextView.setText(recipeStep.getDescription());

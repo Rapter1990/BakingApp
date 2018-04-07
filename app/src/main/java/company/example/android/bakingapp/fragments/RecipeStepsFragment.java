@@ -1,7 +1,7 @@
 package company.example.android.bakingapp.fragments;
 
 import android.content.Context;
-import 	android.support.v4.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,7 +26,7 @@ import company.example.android.bakingapp.data.RecipeStep;
  */
 
 // TODO 124 ) Creating RecipeStepsFragment extending fragment with implementing StepAdapter
-public class RecipeStepsFragment extends Fragment implements StepsAdapter.StepsAdapterOnClickStepListener{
+public class RecipeStepsFragment extends Fragment implements StepsAdapter.StepsAdapterOnClickStepListener {
 
     // TODO 125 ) Defining LOG_TAG, selectedListener interface and Recipe object
     private static final String LOG_TAG = RecipeStepsFragment.class.getSimpleName();
@@ -79,10 +79,10 @@ public class RecipeStepsFragment extends Fragment implements StepsAdapter.StepsA
         int layoutFragment = R.layout.recipe_steps_fragment;
 
         // TODO 129 ) Creating a view to inflate that fragment
-        final View rootView = inflater.inflate(layoutFragment,container,false);
+        final View rootView = inflater.inflate(layoutFragment, container, false);
 
         // TODO 140 ) Defining butterknife to perceive each elements defined by bindView
-        ButterKnife.bind(this,rootView);
+        ButterKnife.bind(this, rootView);
 
         // TODO 132 ) Getting recipe object from main activity via bundle
         Bundle recipeBundle = getActivity().getIntent().getExtras();
@@ -101,8 +101,8 @@ public class RecipeStepsFragment extends Fragment implements StepsAdapter.StepsA
         ArrayList<RecipeStep> recipeStepsList = recipe.getSteps();
 
         // TODO 135 ) Creating adapter for ingredient and steps
-        ingredientsAdapter = new IngredientsAdapter(getContext(),ingredientList);
-        stepsAdapter = new StepsAdapter(getContext(),recipeStepsList,this);
+        ingredientsAdapter = new IngredientsAdapter(getContext(), ingredientList);
+        stepsAdapter = new StepsAdapter(getContext(), recipeStepsList, this);
 
 
         // TODO 136 ) Designing layout for RecyclerViews with recipes' ingredients and steps
@@ -128,6 +128,7 @@ public class RecipeStepsFragment extends Fragment implements StepsAdapter.StepsA
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        selectedListener = (OnStepSelectedListener) context;
+        if (selectedListener instanceof Context)
+            selectedListener = (OnStepSelectedListener) context;
     }
 }

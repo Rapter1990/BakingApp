@@ -35,6 +35,10 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
         // TODO 181 ) Defining ButterKnife to perceive textview and button.
         ButterKnife.bind(this);
 
+        // TODO 194 ) Get current step from RecipeDetailActivity via getParcelable with its key value
+        Bundle extras = getIntent().getExtras();
+        currentStep = extras.getParcelable("CURRENT_RECIPE_STEP");
+
 
     }
 
