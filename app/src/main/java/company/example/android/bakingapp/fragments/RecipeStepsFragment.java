@@ -128,6 +128,7 @@ public class RecipeStepsFragment extends Fragment implements StepsAdapter.StepsA
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        selectedListener = (OnStepSelectedListener) context;
+        if (selectedListener instanceof OnStepSelectedListener)
+            selectedListener = (OnStepSelectedListener) context;
     }
 }
