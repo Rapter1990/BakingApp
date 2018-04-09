@@ -95,7 +95,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeSte
             // TODO 200 ) Checking whether stepId equals to stepId of current recipe step
             if(stepId.equals(currentRecipeSteps.get(stepIndex).getStepId())){
                 recipeStep = currentRecipeSteps.get(stepIndex);
-                break;
+
             }
             // TODO 201 ) Because some stepId is missing from the JSON file , assigning stepId to stepId of current recipe step
             else{

@@ -11,6 +11,7 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import company.example.android.bakingapp.data.RecipeStep;
+import timber.log.Timber;
 
 // TODO 178 ) Creating RecipeStepDetailActivity for displaying detail step with its related video
 public class RecipeStepDetailActivity extends AppCompatActivity {
@@ -49,7 +50,9 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // TODO 197 ) Getting current the id of step
-                String stepId = currentStep.getStepId();
+                String stepId = currentStep.getStepId()+ 1;
+
+                Timber.i(LOG_TAG + "/ Step Id : " + stepId);
 
                 // TODO 203 ) Getting the recipe step according to the step id displayed on the screen
                 RecipeStep stepNavigation = RecipeDetailActivity.navigateStep(stepId);
