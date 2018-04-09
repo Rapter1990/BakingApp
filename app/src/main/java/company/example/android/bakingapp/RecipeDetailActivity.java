@@ -90,6 +90,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeSte
         // TODO 199 ) Getting all steps for current recipe
         ArrayList<RecipeStep> currentRecipeSteps = recipe.getSteps();
 
+
         for(int stepIndex = 0;stepIndex<currentRecipeSteps.size();stepIndex++){
 
             // TODO 200 ) Checking whether stepId equals to stepId of current recipe step
@@ -98,7 +99,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeSte
 
             }
             // TODO 201 ) Because some stepId is missing from the JSON file , assigning stepId to stepId of current recipe step
-            else{
+            else if(Integer.parseInt(stepId) < stepIndex){
                 recipeStep = currentRecipeSteps.get(stepIndex);
                 break;
             }

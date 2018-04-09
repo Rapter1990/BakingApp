@@ -50,7 +50,7 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // TODO 197 ) Getting current the id of step
-                String stepId = String.valueOf(Integer.parseInt(currentStep.getStepId()));
+                String stepId = String.valueOf(Integer.parseInt(currentStep.getStepId()+1));
 
                 Timber.i(LOG_TAG + "/ Step Id : " + stepId);
 
