@@ -1,9 +1,12 @@
 package company.example.android.bakingapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,6 +42,35 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         currentStep = extras.getParcelable("CURRENT_RECIPE_STEP");
 
+
+        // TODO 196 ) Defining button to click next and show related step and video
+        stepButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // TODO 197 ) Getting current the id of step
+                String stepId = currentStep.getStepId();
+
+                // TODO 203 ) Getting the recipe step according to the step id displayed on the screen
+                RecipeStep stepNavigation = RecipeDetailActivity.navigateStep(stepId);
+
+                // TODO 204 ) Checking whether stepNavigation is null or not
+                if(stepNavigation != null){
+
+                    // TODO 205 ) Starting with a new activity in terms of the step of recipe
+                    Bundle extras = new Bundle();
+                    extras.putParcelable("CURRENT_RECIPE_STEP", stepNavigation);
+                    Intent stepDetailActivityIntent = new Intent(RecipeStepDetailActivity.this,
+                            RecipeStepDetailActivity.class);
+                    stepDetailActivityIntent.putExtras(extras);
+                    startActivity(stepDetailActivityIntent);
+                }else{
+                    Toast.makeText(RecipeStepDetailActivity.this,
+                            getString(R.string.noavailablestep),Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
 
     }
 

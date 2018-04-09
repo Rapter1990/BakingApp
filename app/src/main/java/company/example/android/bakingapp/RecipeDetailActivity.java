@@ -5,6 +5,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import java.util.ArrayList;
+
 import company.example.android.bakingapp.data.Recipe;
 import company.example.android.bakingapp.data.RecipeStep;
 import company.example.android.bakingapp.fragments.RecipeStepsFragment;
@@ -78,4 +80,34 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeSte
     public RecipeStep getCurrentStep() {
         return selectedStep;
     }
+
+
+    // TODO 198 ) Getting current step of recipe
+    public static RecipeStep navigateStep(String stepId) {
+
+        RecipeStep recipeStep = null;
+
+        // TODO 199 ) Getting all steps for current recipe
+        ArrayList<RecipeStep> currentRecipeSteps = recipe.getSteps();
+
+        for(int stepIndex = 0;stepIndex<currentRecipeSteps.size();stepIndex++){
+
+            // TODO 200 ) Checking whether stepId equals to stepId of current recipe step
+            if(stepId.equals(currentRecipeSteps.get(stepIndex).getStepId())){
+                recipeStep = currentRecipeSteps.get(stepIndex);
+                break;
+            }
+            // TODO 201 ) Because some stepId is missing from the JSON file , assigning stepId to stepId of current recipe step
+            else{
+                recipeStep = currentRecipeSteps.get(stepIndex);
+                break;
+            }
+        }
+
+        // TODO 202 ) Returning the current step
+        return recipeStep;
+    }
+
+
+
 }
