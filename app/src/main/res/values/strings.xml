@@ -6,5 +6,8 @@
     <string name="recipe_steps_sub_heading">Click Each Step to Show Detail Information</string>
     <string name="button_step_text">Next Step</string>
     <string name="noavailablestep">No Avaialble Step</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="configure_widget_text">Select Recipe</string>
 
 </resources>
