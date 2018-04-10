@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.exoplayer2.SimpleExoPlayer;
@@ -62,6 +64,11 @@ public class RecipeStepsDetailFragment extends Fragment {
     String thumbnailUrl = null;
 
 
+    // TODO 209 ) Defining layout of this fragment
+    @BindView(R.id.recipe_step_fragment)
+    LinearLayout stepDetailLayout;
+
+
     // TODO 148 ) Creating onCreateView to design the fragment involving steps with its video
     @Nullable
     @Override
@@ -90,8 +97,9 @@ public class RecipeStepsDetailFragment extends Fragment {
 
         // TODO 189 ) Checking whether thumbnailUrl is empty or not
         if (thumbnailUrl.isEmpty() && videoUri == null) {
-            simpleExoPlayerView.setDefaultArtwork(BitmapFactory.decodeResource
-                    (getResources(), R.drawable.novideoavailable));
+            //simpleExoPlayerView.setDefaultArtwork(BitmapFactory.decodeResource
+                    //(getResources(), R.drawable.novideoavailable));
+            hideSimpleExoPlayerView();
         }else{
             // TODO 190 ) Initialize the Media Session.
             ExpoMediaPlayerUtils.initializeMediaSession(getActivity(), exoPlayer);
@@ -184,6 +192,20 @@ public class RecipeStepsDetailFragment extends Fragment {
         outState.putInt(PLAYER_STATUE, lastVideoPlayerCurrentPosition);
     }
 
+    // TODO 208 ) Hiding SimpleExoPlayerView to show "NO Available Image"
+    public void hideSimpleExoPlayerView(){
+        simpleExoPlayerView.setVisibility(View.INVISIBLE);
 
+
+        ImageView imageView = new ImageView(getActivity());
+        imageView.setImageResource(R.drawable.novideoavailable);
+
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams
+                (LinearLayout.LayoutParams.MATCH_PARENT, 0,4);
+
+        imageView.setLayoutParams(layoutParams);
+
+        stepDetailLayout.addView(imageView);
+    }
 
 }
