@@ -52,7 +52,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeSte
             twoPane = savedInstanceState.getBoolean("twoPane");
         }
 
-        // CONTINUE STEP 196
+        // CONTINUE STEP 197
 
     }
 
@@ -93,8 +93,12 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeSte
 
         for(int stepIndex = 0;stepIndex<currentRecipeSteps.size();stepIndex++){
 
+            // TODO 206 ) Checking whether stepId equals to stepId of last recipe step
+            if(stepId.equals(String.valueOf(currentRecipeSteps.size()-1))){
+                recipeStep = null;
+            }
             // TODO 200 ) Checking whether stepId equals to stepId of current recipe step
-            if(stepId.equals(currentRecipeSteps.get(stepIndex).getStepId())){
+            else if(stepId.equals(currentRecipeSteps.get(stepIndex).getStepId())){
                 recipeStep = currentRecipeSteps.get(stepIndex);
 
             }
@@ -103,12 +107,12 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeSte
                 recipeStep = currentRecipeSteps.get(stepIndex);
                 break;
             }
+
         }
 
         // TODO 202 ) Returning the current step
         return recipeStep;
     }
-
 
 
 }
