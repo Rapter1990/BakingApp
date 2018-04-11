@@ -205,7 +205,7 @@ public class RecipeStepsDetailFragment extends Fragment {
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams
                 (LinearLayout.LayoutParams.MATCH_PARENT, 0,4);
 
-        
+
         imageView.setLayoutParams(layoutParams);
 
         stepDetailLayout.addView(imageView);
