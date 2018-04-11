@@ -5,6 +5,8 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -96,7 +98,7 @@ public class RecipeStepsDetailFragment extends Fragment {
         thumbnailUrl = recipeStep.getThumbnailURL().trim();
 
         // TODO 189 ) Checking whether thumbnailUrl is empty or not
-        if (thumbnailUrl.isEmpty() && videoUri == null) {
+        if (String.valueOf(thumbnailUrl).equals("") && String.valueOf(videoUri).equals("")) {
             //simpleExoPlayerView.setDefaultArtwork(BitmapFactory.decodeResource
                     //(getResources(), R.drawable.novideoavailable));
             hideSimpleExoPlayerView();
@@ -194,7 +196,7 @@ public class RecipeStepsDetailFragment extends Fragment {
 
     // TODO 208 ) Hiding SimpleExoPlayerView to show "NO Available Image"
     public void hideSimpleExoPlayerView(){
-        simpleExoPlayerView.setVisibility(View.INVISIBLE);
+        simpleExoPlayerView.setVisibility(View.GONE);
 
 
         ImageView imageView = new ImageView(getActivity());
@@ -203,9 +205,11 @@ public class RecipeStepsDetailFragment extends Fragment {
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams
                 (LinearLayout.LayoutParams.MATCH_PARENT, 0,4);
 
+        
         imageView.setLayoutParams(layoutParams);
 
         stepDetailLayout.addView(imageView);
+
     }
 
 }
