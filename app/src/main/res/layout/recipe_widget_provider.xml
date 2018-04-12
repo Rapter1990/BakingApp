@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/widget_recipe_card"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/widget_card_padding"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/widget_recipe_name_texview"
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_recipe_name_textview_height"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textSize="@dimen/widget_recipe_name_size"
+        android:textStyle="bold"
+        tools:text="Nutella Pie" />
+
+    <ImageView
+        android:id="@+id/widget_recipe_image"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_recipe_imageview_height"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/food" />
+
+    <TextView
+        android:id="@+id/widget_recipe_ingredient_heading"
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_recipe_ingredient_heading_textview_height"
+        android:layout_gravity="left"
+        android:text="@string/recipe_ingredients_heading"
+        android:textAlignment="center"
+        android:textSize="@dimen/widget_recipe_ingredient_title_size"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/widget_recipe_ingredient_list"
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_recipe_ingredient_list_textview_height"
+        android:layout_gravity="left"
+        android:padding="2dp"
+        android:textSize="@dimen/widget_recipe_ingredient_size"
+        android:textStyle="bold"
+        tools:text="something, something" />
+
+</LinearLayout>

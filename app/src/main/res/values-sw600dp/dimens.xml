@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="widget_card_padding">8dp</dimen>
+    <dimen name="widget_recipe_name_textview_height">22dp</dimen>
+    <dimen name="widget_recipe_name_size">20sp</dimen>
+    <dimen name="widget_recipe_imageview_height">80dp</dimen>
+    <dimen name="widget_recipe_ingredient_heading_textview_height">22</dimen>
+    <dimen name="widget_recipe_ingredient_title_size">20sp</dimen>
+    <dimen name="widget_recipe_ingredient_list_textview_height">140dp</dimen>
+    <dimen name="widget_recipe_ingredient_size">22sp</dimen>
+
+</resources>
