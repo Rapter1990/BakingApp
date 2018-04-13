@@ -52,7 +52,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeSte
             twoPane = savedInstanceState.getBoolean("twoPane");
         }
 
-        // CONTINUE STEP 249
+        // CONTINUE STEP 262
 
     }
 

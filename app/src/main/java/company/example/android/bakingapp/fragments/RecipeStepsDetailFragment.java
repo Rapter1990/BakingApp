@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -70,6 +71,10 @@ public class RecipeStepsDetailFragment extends Fragment {
     @BindView(R.id.recipe_step_fragment)
     LinearLayout stepDetailLayout;
 
+
+    // TODO 261 ) Defining imageview
+    @BindView(R.id.novideo_placeholder_iv)
+    ImageView noImageAvailableImageView;
 
     // TODO 148 ) Creating onCreateView to design the fragment involving steps with its video
     @Nullable
@@ -198,17 +203,14 @@ public class RecipeStepsDetailFragment extends Fragment {
     public void hideSimpleExoPlayerView(){
         simpleExoPlayerView.setVisibility(View.GONE);
 
+        //ImageView imageView = new ImageView(getActivity());
+        //imageView.setImageResource(R.drawable.novideoavailable);
+        //LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams
+        //        (LinearLayout.LayoutParams.MATCH_PARENT, 0,4);
+        //imageView.setLayoutParams(layoutParams);
+        //stepDetailLayout.addView(imageView);
 
-        ImageView imageView = new ImageView(getActivity());
-        imageView.setImageResource(R.drawable.novideoavailable);
-
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams
-                (LinearLayout.LayoutParams.MATCH_PARENT, 0,4);
-
-
-        imageView.setLayoutParams(layoutParams);
-
-        stepDetailLayout.addView(imageView);
+        noImageAvailableImageView.setVisibility(View.VISIBLE);
 
     }
 
