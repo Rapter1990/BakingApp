@@ -103,6 +103,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeSte
 
         // TODO 272 ) Checking whether the layout is designed for twopanel as widget or normal screen then calling new Activity
         if(twoPane){
+            selectedStep = currentStep;
             RecipeStepsDetailFragment stepDetailFragment = new RecipeStepsDetailFragment();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.step_detail_container, stepDetailFragment)
