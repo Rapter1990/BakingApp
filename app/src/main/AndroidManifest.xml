@@ -34,7 +34,14 @@
                 android:resource="@xml/recipe_widget_provider_info" />
         </receiver>
 
-        <activity android:name=".widgets.ConfigRecipeWidget"></activity>
+        <activity android:name=".widgets.ConfigRecipeWidget"
+            android:theme="@android:style/Theme.Dialog"
+            android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>
