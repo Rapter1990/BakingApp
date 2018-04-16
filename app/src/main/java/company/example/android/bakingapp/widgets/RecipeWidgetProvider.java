@@ -26,7 +26,7 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
     private static final String LOG_TAG = RecipeWidgetProvider.class.getSimpleName();
 
     // TODO 253 ) Defining divider
-    private static final String DIVIDER = "/";
+    private static final String DIVIDER = ":";
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {

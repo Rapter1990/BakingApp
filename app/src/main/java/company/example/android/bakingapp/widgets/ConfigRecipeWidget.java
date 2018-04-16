@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RemoteViews;
@@ -80,6 +81,10 @@ public class ConfigRecipeWidget extends Activity {
 
         // TODO 216 ) Defining ButterKnife to perceive each attribute of layout
         ButterKnife.bind(this);
+
+        // TODO 296 ) Setting layout size of activity
+        getWindow().setLayout(
+                        ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
         // TODO 219 ) Defining ArrayAdapter with spinnerOptions and setting adapter style as dropdown structure to spinner
         final ArrayAdapter<String> spinnerAdapter =
@@ -182,7 +187,7 @@ public class ConfigRecipeWidget extends Activity {
                 // TODO 243 ) Saving selected Recipe via Shared Preference
                 saveRecipePreference(getApplicationContext(),
                         appwidgetId,
-                        selectedRecipe + "/" + recipeDetailHashMap.get(selectedRecipe),
+                        selectedRecipe + ":" + recipeDetailHashMap.get(selectedRecipe),
                         recipe);
 
 
