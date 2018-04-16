@@ -238,7 +238,7 @@ public class ConfigRecipeWidget extends Activity {
     }
 
     // TODO 241 ) Deleting Recipe
-    public static void deletetRecipePreference(Context context, int appWidgetId) {
+    public static void deleteRecipePreference(Context context, int appWidgetId) {
         SharedPreferences.Editor prefs = context.getSharedPreferences(PREFS_NAME, 0).edit();
         prefs.remove(PREF_PREFIX_KEY + appWidgetId);
         prefs.apply();

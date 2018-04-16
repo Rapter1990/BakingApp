@@ -108,7 +108,7 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
     public void onDeleted(Context context, int[] appWidgetIds) {
         // TODO 260 ) Deleting recipe in the widget via deletetRecipePreference.
         for (int appWidgetId : appWidgetIds) {
-            ConfigRecipeWidget.deletetRecipePreference(context, appWidgetId);
+            ConfigRecipeWidget.deleteRecipePreference(context, appWidgetId);
         }
     }
 }

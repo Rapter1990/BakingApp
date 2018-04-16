@@ -1,6 +1,7 @@
 package company.example.android.bakingapp;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -43,38 +44,48 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         currentStep = extras.getParcelable("CURRENT_RECIPE_STEP");
 
+        // TODO 269 ) Defining orientation of layout which is widget or not.
+        int currentOrientation = getResources().getConfiguration().orientation;
 
-        // TODO 196 ) Defining button to click next and show related step and video
-        stepButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        // TODO 270 ) Checking whether landspace is shown on the right side of layout in FrameLayout in the widget and
+        // covering the description and video of recipe at first
+        if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+            stepDetailDescription.setVisibility(View.GONE);
+            stepButton.setVisibility(View.GONE);
+        }
+        // TODO 271 ) After covering these attribute, show each step detail and video while pressing each one related with short description of recipe.
+        else {
+            // TODO 196 ) Defining button to click next and show related step and video
+            stepButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                // TODO 197 ) Getting current the id of step
-                String stepId = String.valueOf(Integer.parseInt(currentStep.getStepId()));
+                    // TODO 197 ) Getting current the id of step
+                    String stepId = String.valueOf(Integer.parseInt(currentStep.getStepId()));
 
-                Timber.i(LOG_TAG + "/ Step Id : " + stepId);
+                    Timber.i(LOG_TAG + "/ Step Id : " + stepId);
 
-                // TODO 203 ) Getting the recipe step according to the step id displayed on the screen
-                RecipeStep stepNavigation = RecipeDetailActivity.navigateStep(stepId);
+                    // TODO 203 ) Getting the recipe step according to the step id displayed on the screen
+                    RecipeStep stepNavigation = RecipeDetailActivity.navigateStep(stepId);
 
-                // TODO 204 ) Checking whether stepNavigation is null or not
-                if(stepNavigation != null){
+                    // TODO 204 ) Checking whether stepNavigation is null or not
+                    if (stepNavigation != null) {
 
-                    // TODO 205 ) Starting with a new activity in terms of the step of recipe
-                    Bundle extras = new Bundle();
-                    extras.putParcelable("CURRENT_RECIPE_STEP", stepNavigation);
-                    Intent stepDetailActivityIntent = new Intent(RecipeStepDetailActivity.this,
-                            RecipeStepDetailActivity.class);
-                    stepDetailActivityIntent.putExtras(extras);
-                    startActivity(stepDetailActivityIntent);
-                }else{
-                    Toast.makeText(RecipeStepDetailActivity.this,
-                            getString(R.string.noavailablestep),Toast.LENGTH_SHORT).show();
+                        // TODO 205 ) Starting with a new activity in terms of the step of recipe
+                        Bundle extras = new Bundle();
+                        extras.putParcelable("CURRENT_RECIPE_STEP", stepNavigation);
+                        Intent stepDetailActivityIntent = new Intent(RecipeStepDetailActivity.this,
+                                RecipeStepDetailActivity.class);
+                        stepDetailActivityIntent.putExtras(extras);
+                        startActivity(stepDetailActivityIntent);
+                    } else {
+                        Toast.makeText(RecipeStepDetailActivity.this,
+                                getString(R.string.noavailablestep), Toast.LENGTH_SHORT).show();
+                    }
+
                 }
-
-            }
-        });
-
+            });
+        }
     }
 
     // TODO 195 ) Getting current step from RecipeDetailActivity via getParcelable with its key value

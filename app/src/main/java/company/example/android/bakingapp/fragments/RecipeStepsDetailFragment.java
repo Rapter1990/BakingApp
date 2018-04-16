@@ -76,6 +76,10 @@ public class RecipeStepsDetailFragment extends Fragment {
     @BindView(R.id.novideo_placeholder_iv)
     ImageView noImageAvailableImageView;
 
+
+    // TODO 274 ) Defining activity name for widget
+    String activityName = ""; //getActivity().getClass().getSimpleName();
+
     // TODO 148 ) Creating onCreateView to design the fragment involving steps with its video
     @Nullable
     @Override
@@ -90,8 +94,24 @@ public class RecipeStepsDetailFragment extends Fragment {
         // TODO 151 ) Defining butterknife to perceive each elements defined by bindView
         ButterKnife.bind(this, rootView);
 
-        // TODO 183 ) Defining  RecipeStep from detail activity
-        recipeStep = ((RecipeStepDetailActivity) getActivity()).getCurrentStep();
+        // TOD O 183 ) Defining  RecipeStep from detail activity
+        //recipeStep = ((RecipeStepDetailActivity) getActivity()).getCurrentStep();
+
+        // TODO 275 ) Using isAdded() to get acitivty name
+        if (isAdded()) {
+            activityName = getActivity().getClass().getSimpleName();
+        }
+
+        // TODO 273 ) Checking whether the current step is used for widget or used for normal screen
+        if(activityName.equals(RecipeStepDetailActivity.class.getSimpleName())){
+            // TODO 183 ) Defining  RecipeStep from detail activity
+            recipeStep = ((RecipeStepDetailActivity) getActivity()).getCurrentStep();
+            //navigationButton.setVisibility(View.GONE);
+        }else{
+            recipeStep = ((RecipeDetailActivity) getActivity()).getCurrentStep();
+            navigationButton.setVisibility(View.GONE);
+        }
+
 
         // TODO 184 ) Setting step detail description to textview
         stepDescriptionTextView.setText(recipeStep.getDescription());

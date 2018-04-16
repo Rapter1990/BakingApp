@@ -4,11 +4,15 @@ import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.FrameLayout;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import company.example.android.bakingapp.data.Recipe;
 import company.example.android.bakingapp.data.RecipeStep;
+import company.example.android.bakingapp.fragments.RecipeStepsDetailFragment;
 import company.example.android.bakingapp.fragments.RecipeStepsFragment;
 import timber.log.Timber;
 
@@ -29,13 +33,20 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeSte
     private RecipeStep selectedStep;
 
     // TODO 173 ) Defining stepDetailFragment for designing layout
-    private RecipeStepsFragment stepDetailFragment;
+    private RecipeStepsDetailFragment stepDetailFragment;
+
+    // TODO 263 ) Defining recipe step detail information as a container step_detail_container
+    //@BindView(R.id.step_detail_container)
+    //FrameLayout stepDetailContainer;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_detail);
+
+        // TODO 264 ) Defining ButterKnife
+        //ButterKnife.bind(this);
 
         // TODO 167 ) Getting the Recipe from the Bundle defined in MainActivity
         Bundle extras = getIntent().getExtras();
@@ -51,13 +62,33 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeSte
             selectedStep = savedInstanceState.getParcelable("selectedStep");
             twoPane = savedInstanceState.getBoolean("twoPane");
         }
+        else{ // TODO 262 ) Checking whether the saved object is in the widget or not and defining twoPane
+            if(findViewById(R.id.step_detail_container) != null){ // TODO 265 ) Checking whether step detail FrameLayout is null or not
+                twoPane = true;
+                selectedStep = recipe.getSteps().get(0); // TODO 266 ) Getting first step of selected recipe
+            }else{
+                twoPane = false;
+            }
+        }
 
-        // CONTINUE STEP 262
+        // TODO 267 ) Checking whether the layout is two panel structure or not.
+        if(twoPane){
+            // TODO 268 ) Checking whether recipe step as savedInstanceState is null or not according to whether step was saved before or not
+            if(savedInstanceState == null){
+                stepDetailFragment = new RecipeStepsDetailFragment();
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.step_detail_container,stepDetailFragment,"Step Video Not Saved Before");
+            }else{
+                stepDetailFragment = new RecipeStepsDetailFragment();
+                stepDetailFragment = (RecipeStepsDetailFragment)
+                        getSupportFragmentManager().getFragment(savedInstanceState,"Step Video Saved Before");
+            }
+        }
 
     }
 
 
-    // TODO 170 ) Defining onSaveInstanceState to put step and two pane infomration
+    // TODO 170 ) Defining onSaveInstanceState to put step and two pane informaation
     // because of determining whether widget works or normal screen works
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -69,11 +100,21 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeSte
     // TODO 172 ) Defining onStepSelected for opening new Intent to show step with video according to widget or normal screen
     @Override
     public void onStepSelected(RecipeStep currentStep) {
-        Bundle extras = new Bundle();
-        extras.putParcelable("CURRENT_RECIPE_STEP", currentStep);
-        Intent recipeStepDetailActivityIntent = new Intent(this, RecipeStepDetailActivity.class);
-        recipeStepDetailActivityIntent.putExtras(extras);
-        startActivity(recipeStepDetailActivityIntent);
+
+        // TODO 272 ) Checking whether the layout is designed for twopanel as widget or normal screen then calling new Activity
+        if(twoPane){
+            RecipeStepsDetailFragment stepDetailFragment = new RecipeStepsDetailFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.step_detail_container, stepDetailFragment)
+                    .commit();
+        }
+        else{
+            Bundle extras = new Bundle();
+            extras.putParcelable("CURRENT_RECIPE_STEP", currentStep);
+            Intent recipeStepDetailActivityIntent = new Intent(this, RecipeStepDetailActivity.class);
+            recipeStepDetailActivityIntent.putExtras(extras);
+            startActivity(recipeStepDetailActivityIntent);
+        }
     }
 
     // TODO 183 ) Defining  getCurrentStep for getting RecipeStep from Stepdetail
