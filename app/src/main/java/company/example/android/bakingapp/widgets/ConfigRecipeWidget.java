@@ -258,4 +258,5 @@ public class ConfigRecipeWidget extends Activity {
         return recipeDetails;
     }
 
+
 }

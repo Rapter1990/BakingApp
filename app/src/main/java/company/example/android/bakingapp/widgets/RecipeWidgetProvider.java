@@ -3,6 +3,7 @@ package company.example.android.bakingapp.widgets;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -40,7 +41,7 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
                 ConfigRecipeWidget.getRecipeDetailPreference(context, appWidgetId);
 
         // TODO 250 ) Checking whether recipeWidgetDetails is null or not
-        if(recipeWidgetDetails == null) {
+        if(recipeWidgetDetails.equals(null)) {
             return;
         }
 
@@ -111,5 +112,18 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
             ConfigRecipeWidget.deleteRecipePreference(context, appWidgetId);
         }
     }
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        super.onReceive(context, intent);
+
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+        ComponentName watchWidget = new ComponentName(context, RecipeWidgetProvider.class);
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(watchWidget);
+        onUpdate(context, appWidgetManager, appWidgetIds);
+
+    }
+
+
 }
 
