@@ -40,7 +40,7 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
                 ConfigRecipeWidget.getRecipeDetailPreference(context, appWidgetId);
 
         // TODO 250 ) Checking whether recipeWidgetDetails is null or not
-        if(recipeWidgetDetails.equals("")) {
+        if(recipeWidgetDetails == null) {
             return;
         }
 
