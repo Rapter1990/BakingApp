@@ -3,7 +3,6 @@ package company.example.android.bakingapp.widgets;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,8 +19,8 @@ import timber.log.Timber;
 public class RecipeWidgetProvider extends AppWidgetProvider {
 
     // TODO 251 ) Defining recipe's name and its ingredient as null
-    private static String recipeName = null;
-    private static String recipeIngredient = null;
+    private static String recipeName = "";
+    private static String recipeIngredient = "";
 
     // TODO 252 ) Defining LOG_TAG
     private static final String LOG_TAG = RecipeWidgetProvider.class.getSimpleName();
@@ -41,7 +40,7 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
                 ConfigRecipeWidget.getRecipeDetailPreference(context, appWidgetId);
 
         // TODO 250 ) Checking whether recipeWidgetDetails is null or not
-        if(recipeWidgetDetails.equals(null)) {
+        if(recipeWidgetDetails.equals("")) {
             return;
         }
 
@@ -111,17 +110,6 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
         for (int appWidgetId : appWidgetIds) {
             ConfigRecipeWidget.deleteRecipePreference(context, appWidgetId);
         }
-    }
-
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        super.onReceive(context, intent);
-
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-        ComponentName watchWidget = new ComponentName(context, RecipeWidgetProvider.class);
-        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(watchWidget);
-        onUpdate(context, appWidgetManager, appWidgetIds);
-
     }
 
 
