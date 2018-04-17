@@ -41,7 +41,7 @@
         android:id="@+id/widget_recipe_ingredient_list"
         android:background="#ffffff"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="350dp"
         android:layout_gravity="left"
         android:padding="2dp"
         android:textSize="22sp"
