@@ -4,25 +4,25 @@
     android:id="@+id/widget_recipe_card"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/widget_card_padding"
+    android:padding="8dp"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/widget_recipe_name_texview"
         android:background="#ffffff"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/widget_recipe_name_textview_height"
+        android:layout_height="22dp"
         android:textAlignment="center"
         android:gravity="center"
         android:layout_gravity="center"
-        android:textSize="@dimen/widget_recipe_name_size"
+        android:textSize="20sp"
         android:textStyle="bold"
         tools:text="Nutella Pie" />
 
     <ImageView
         android:id="@+id/widget_recipe_image"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/widget_recipe_imageview_height"
+        android:layout_height="80dp"
         android:scaleType="centerCrop"
         tools:src="@drawable/food" />
 
@@ -30,22 +30,22 @@
         android:id="@+id/widget_recipe_ingredient_heading"
         android:background="#ffffff"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/widget_recipe_ingredient_heading_textview_height"
+        android:layout_height="22dp"
         android:layout_gravity="left"
         android:text="@string/recipe_ingredients_heading"
         android:textAlignment="center"
-        android:textSize="@dimen/widget_recipe_ingredient_title_size"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/widget_recipe_ingredient_list"
         android:background="#ffffff"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/widget_recipe_ingredient_list_textview_height"
+        android:layout_height="140dp"
         android:layout_gravity="left"
         android:padding="2dp"
-        android:textSize="@dimen/widget_recipe_ingredient_size"
+        android:textSize="22sp"
         android:textStyle="bold"
-        tools:text="something, something" />
+        tools:text="Ingredient Information" />
 
 </LinearLayout>
