@@ -82,6 +82,9 @@ public class RecipeStepsDetailFragment extends Fragment {
     // TODO 274 ) Defining activity name for widget
     String activityName = ""; //getActivity().getClass().getSimpleName();
 
+    // TODO 305 ) FEEDBACK 9 ) Defining exoPlayerPlayWhenReady boolean variable;
+    private static boolean exoPlayerPlayWhenReady = false;
+
     // TODO 148 ) Creating onCreateView to design the fragment involving steps with its video
     @Nullable
     @Override
@@ -186,7 +189,9 @@ public class RecipeStepsDetailFragment extends Fragment {
         // TODO 304 ) FEEDBACK 8 ) Because we wait we wait as long as possible until we grab resources Before API level 24, checking sdk then release ExpoPlayer
         if (Util.SDK_INT > 23) {
             if (exoPlayer != null) {
-                exoPlayer.setPlayWhenReady(false);
+                boolean exoPlayerPlayWhenReady =exoPlayer.getPlayWhenReady();
+                //exoPlayer.setPlayWhenReady(false);
+                exoPlayer.setPlayWhenReady(exoPlayerPlayWhenReady);
             }
         }
         Timber.i("%s/n  onPause", LOG_TAG);
@@ -260,7 +265,8 @@ public class RecipeStepsDetailFragment extends Fragment {
             }
 
             // TODO 158 ) Preparing SimpleExoPlayer to set Play
-            exoPlayer.setPlayWhenReady(true);
+            //exoPlayer.setPlayWhenReady(true);
+            exoPlayer.setPlayWhenReady(exoPlayerPlayWhenReady);
         }
     }
 
