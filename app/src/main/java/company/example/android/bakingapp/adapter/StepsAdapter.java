@@ -27,6 +27,8 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsViewHol
     private ArrayList<RecipeStep> stepList;
     private StepsAdapterOnClickStepListener stepsAdapterOnClickHandler;
 
+    private final int STEP = 1;
+
     // TODO 97 ) Defining a constructor with Context list of steps and onClickHandler
     public StepsAdapter(Context context, ArrayList<RecipeStep> recipeStepList,
                         StepsAdapterOnClickStepListener listener) {
@@ -51,11 +53,19 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsViewHol
     // TODO 99 ) Defining onBindViewHolder to get step number and its information
     @Override
     public void onBindViewHolder(StepsViewHolder holder, int position) {
-        RecipeStep currentStep = stepList.get(position);
 
-        holder.stepId.setText("Step " + (position + 1));
-        holder.stepDescription.setText(currentStep.getShortDescription());
+        // TODO 298 ) FEEDBACK 2 ) Checkcing STEP to get ID and information of step
+        switch(holder.getItemViewType()){
+            case STEP:
+                RecipeStep currentStep = stepList.get(position);
+                holder.stepId.setText("Step " + (position + 1));
+                holder.stepDescription.setText(currentStep.getShortDescription());
+                break;
+        }
 
+        //RecipeStep currentStep = stepList.get(position);
+        //holder.stepId.setText("Step " + (position + 1));
+        //holder.stepDescription.setText(currentStep.getShortDescription());
     }
 
     // TODO 100 ) Defining the size of step and return it
@@ -93,5 +103,15 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsViewHol
             RecipeStep recipeStep = stepList.get(position);
             stepsAdapterOnClickHandler.onClick(recipeStep);
         }
+    }
+
+    // TODO 297 ) FEEDBACK 1 ) Implementing getItemViewType to check whether or not a video is available in the widget
+    @Override
+    public int getItemViewType(int position) {
+
+        if(stepList.get(position) != null){
+            return STEP;
+        }
+        return -1;
     }
 }

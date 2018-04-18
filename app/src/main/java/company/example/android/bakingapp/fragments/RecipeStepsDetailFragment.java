@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
+import com.google.android.exoplayer2.util.Util;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -59,6 +60,7 @@ public class RecipeStepsDetailFragment extends Fragment {
 
     // TODO 161 ) Defining PLAYER_STATUE String variable to determine the current position of SimpleExoPlayer for Bundle
     private static final String PLAYER_STATUE = "player_current_position";
+    private static final String PLAYER_READY ="player_ready";
 
     // TODO 185 ) Defining videoURL
     private Uri videoUri = null;
@@ -141,6 +143,15 @@ public class RecipeStepsDetailFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        // TODO 301 ) FEEDBACK 5 ) Because we wait we wait as long as possible until we grab resources Before API level 24, checking sdk then initialize ExpoPlayer
+        if (Util.SDK_INT > 23) {
+            initializeExpoPlayer();
+        }
+    }
+
 
     // TODO 152 ) Creating onResume method for initializing SimpleExoPlayer and deteriming its current position
     @Override
@@ -148,7 +159,79 @@ public class RecipeStepsDetailFragment extends Fragment {
         super.onResume();
 
         Timber.i("%s / onResume Called", LOG_TAG);
+        // TODO 302 ) FEEDBACK 6 ) Because we wait we wait as long as possible until we grab resources Before API level 24, checking sdk then initialize ExpoPlayer
+        if ((Util.SDK_INT <= 23 ||  exoPlayer == null)) {
+            initializeExpoPlayer();
+        }
 
+    }
+
+
+    // TODO 159 ) Creating onStop to release SimpleExoPlayer
+    @Override
+    public void onStop() {
+        super.onStop();
+        Timber.i("%s/ onStop", LOG_TAG);
+        // TODO 303 ) FEEDBACK 7 ) Because we wait we wait as long as possible until we grab resources Before API level 24, checking sdk then release ExpoPlayer
+        if (Util.SDK_INT <= 23) {
+            exoPlayer = ExpoMediaPlayerUtils.releasePlayer(exoPlayer);
+        }
+    }
+
+
+    // TODO 160 ) Creating onPause to pause SimpleExoPlayer
+    @Override
+    public void onPause() {
+        super.onPause();
+        // TODO 304 ) FEEDBACK 8 ) Because we wait we wait as long as possible until we grab resources Before API level 24, checking sdk then release ExpoPlayer
+        if (Util.SDK_INT > 23) {
+            if (exoPlayer != null) {
+                exoPlayer.setPlayWhenReady(false);
+            }
+        }
+        Timber.i("%s/n  onPause", LOG_TAG);
+    }
+
+
+    // TODO 162 ) Creating onActivityCreated to resume the exoplayer having a position while opening the Activity
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+            videoPlayerCurrentPosition = savedInstanceState.getInt(PLAYER_STATUE);
+        }
+    }
+
+    // TODO 163 ) Creating onSaveInstanceState for saving the current position of Exoplayer to resume it later when it's opened again.
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        int lastVideoPlayerCurrentPosition = (int) exoPlayer.getCurrentPosition();
+        outState.putInt(PLAYER_STATUE, lastVideoPlayerCurrentPosition);
+
+        // TODO 299 ) FEEDBACK 3 ) Checkcing whether expoplayer get Play When it's ready
+        boolean exoPlayerPlayWhenReady = exoPlayer.getPlayWhenReady();
+        outState.putBoolean(PLAYER_READY,exoPlayerPlayWhenReady);
+
+    }
+
+    // TODO 208 ) Hiding SimpleExoPlayerView to show "NO Available Image"
+    public void hideSimpleExoPlayerView(){
+        simpleExoPlayerView.setVisibility(View.GONE);
+
+        //ImageView imageView = new ImageView(getActivity());
+        //imageView.setImageResource(R.drawable.novideoavailable);
+        //LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams
+        //        (LinearLayout.LayoutParams.MATCH_PARENT, 0,4);
+        //imageView.setLayoutParams(layoutParams);
+        //stepDetailLayout.addView(imageView);
+
+        noImageAvailableImageView.setVisibility(View.VISIBLE);
+
+    }
+
+    // TODO 300 ) FEEDBACK 4 ) Creating initializeExpoPlayer method
+    private void initializeExpoPlayer(){
         // TODO 153 ) Checking whether SimpleExoPlayer is null
         if (exoPlayer == null) {
 
@@ -179,59 +262,6 @@ public class RecipeStepsDetailFragment extends Fragment {
             // TODO 158 ) Preparing SimpleExoPlayer to set Play
             exoPlayer.setPlayWhenReady(true);
         }
-    }
-
-
-    // TODO 159 ) Creating onStop to release SimpleExoPlayer
-    @Override
-    public void onStop() {
-        super.onStop();
-        Timber.i("%s/ onStop", LOG_TAG);
-        exoPlayer = ExpoMediaPlayerUtils.releasePlayer(exoPlayer);
-    }
-
-
-    // TODO 160 ) Creating onPause to pause SimpleExoPlayer
-    @Override
-    public void onPause() {
-        super.onPause();
-        if (exoPlayer != null) {
-            exoPlayer.setPlayWhenReady(false);
-        }
-        Timber.i("%s/n  onPause", LOG_TAG);
-    }
-
-
-    // TODO 162 ) Creating onActivityCreated to resume the exoplayer having a position while opening the Activity
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        if (savedInstanceState != null) {
-            videoPlayerCurrentPosition = savedInstanceState.getInt(PLAYER_STATUE);
-        }
-    }
-
-    // TODO 163 ) Creating onSaveInstanceState for saving the current position of Exoplayer to resume it later when it's opened again.
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        int lastVideoPlayerCurrentPosition = (int) exoPlayer.getCurrentPosition();
-        outState.putInt(PLAYER_STATUE, lastVideoPlayerCurrentPosition);
-    }
-
-    // TODO 208 ) Hiding SimpleExoPlayerView to show "NO Available Image"
-    public void hideSimpleExoPlayerView(){
-        simpleExoPlayerView.setVisibility(View.GONE);
-
-        //ImageView imageView = new ImageView(getActivity());
-        //imageView.setImageResource(R.drawable.novideoavailable);
-        //LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams
-        //        (LinearLayout.LayoutParams.MATCH_PARENT, 0,4);
-        //imageView.setLayoutParams(layoutParams);
-        //stepDetailLayout.addView(imageView);
-
-        noImageAvailableImageView.setVisibility(View.VISIBLE);
-
     }
 
 }
