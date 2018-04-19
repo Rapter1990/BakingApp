@@ -27,6 +27,7 @@ import company.example.android.bakingapp.RecipeDetailActivity;
 import company.example.android.bakingapp.RecipeStepDetailActivity;
 import company.example.android.bakingapp.data.RecipeStep;
 import company.example.android.bakingapp.utilities.ExpoMediaPlayerUtils;
+import company.example.android.bakingapp.utilities.NetworkUtils;
 import timber.log.Timber;
 
 /**
@@ -133,14 +134,25 @@ public class RecipeStepsDetailFragment extends Fragment {
                     //(getResources(), R.drawable.novideoavailable));
             hideSimpleExoPlayerView();
         }else{
-            // TODO 190 ) Initialize the Media Session.
-            ExpoMediaPlayerUtils.initializeMediaSession(getActivity(), exoPlayer);
-            // TODO 191 ) Initialize the player.
-            if (videoUri != null) {
-                exoPlayer = ExpoMediaPlayerUtils.initializePlayer(videoUri, getActivity(), exoPlayer);
-                simpleExoPlayerView.setPlayer(exoPlayer);
-                Timber.d(LOG_TAG + " / Player initialized");
+            // TODO 306 ) FEEDBACK 10 ) Checking whether thumbnailUrl is available from server or not
+            String urlContentType = NetworkUtils.getUrlContentType(thumbnailUrl);
+            if (urlContentType != null && !urlContentType.isEmpty()) {
+                if (urlContentType.startsWith("image/")) {
+                    simpleExoPlayerView.setDefaultArtwork(NetworkUtils.getBitmapFromURL(thumbnailUrl));
+                }
             }
+            else {
+                hideSimpleExoPlayerView();
+            }
+        }
+
+        // TODO 190 ) Initialize the Media Session.
+        ExpoMediaPlayerUtils.initializeMediaSession(getActivity(), exoPlayer);
+        // TODO 191 ) Initialize the player.
+        if (videoUri != null) {
+            exoPlayer = ExpoMediaPlayerUtils.initializePlayer(videoUri, getActivity(), exoPlayer);
+            simpleExoPlayerView.setPlayer(exoPlayer);
+            Timber.d(LOG_TAG + " / Player initialized");
         }
 
         return rootView;

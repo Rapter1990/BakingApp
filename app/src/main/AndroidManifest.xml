@@ -49,6 +49,7 @@
             </intent-filter>
         </activity>
 
+        <service android:name=".listviewWidget.WidgetService" />
     </application>
 
 </manifest>
