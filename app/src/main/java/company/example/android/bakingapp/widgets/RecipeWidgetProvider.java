@@ -9,6 +9,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.RemoteViews;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import company.example.android.bakingapp.R;
 import company.example.android.bakingapp.RecipeDetailActivity;
 import company.example.android.bakingapp.data.Recipe;
@@ -55,6 +58,7 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
             Timber.d(LOG_TAG +" " + recipeWidgetDetails + " does not contain " + DIVIDER);
         }
 
+        ArrayList<String> ingredientList = new ArrayList<>(Arrays.asList(recipeIngredient));
 
         // TODO 255 ) Defining recipe widget layout as RemoteViews
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.recipe_widget_provider);
