@@ -85,7 +85,7 @@ public class RecipeStepsDetailFragment extends Fragment {
     String activityName = ""; //getActivity().getClass().getSimpleName();
 
     // TODO 305 ) FEEDBACK 9 ) Defining exoPlayerPlayWhenReady boolean variable;
-    private static boolean exoPlayerPlayWhenReady = false;
+    private static boolean exoPlayerPlayWhenReady = true;
 
     // TODO 148 ) Creating onCreateView to design the fragment involving steps with its video
     @Nullable
@@ -215,7 +215,8 @@ public class RecipeStepsDetailFragment extends Fragment {
         super.onStop();
         Timber.i("%s/ onStop", LOG_TAG);
         // TODO 303 ) FEEDBACK 7 ) Because we wait we wait as long as possible until we grab resources Before API level 24, checking sdk then release ExpoPlayer
-        if (Util.SDK_INT <= 23) {
+        if (Util.SDK_INT > 23) {
+            exoPlayerPlayWhenReady = exoPlayer.getPlayWhenReady();
             exoPlayer = ExpoMediaPlayerUtils.releasePlayer(exoPlayer);
         }
     }
@@ -226,11 +227,12 @@ public class RecipeStepsDetailFragment extends Fragment {
     public void onPause() {
         super.onPause();
         // TODO 304 ) FEEDBACK 8 ) Because we wait we wait as long as possible until we grab resources Before API level 24, checking sdk then release ExpoPlayer
-        if (Util.SDK_INT > 23) {
+        if (Util.SDK_INT <= 23) {
             if (exoPlayer != null) {
                 //exoPlayerPlayWhenReady =exoPlayer.getPlayWhenReady();
                 //exoPlayer.setPlayWhenReady(false);
-                exoPlayer.setPlayWhenReady(exoPlayerPlayWhenReady);
+                exoPlayerPlayWhenReady = exoPlayer.getPlayWhenReady();
+                exoPlayer = ExpoMediaPlayerUtils.releasePlayer(exoPlayer);
             }
         }
         Timber.i("%s/n  onPause", LOG_TAG);
