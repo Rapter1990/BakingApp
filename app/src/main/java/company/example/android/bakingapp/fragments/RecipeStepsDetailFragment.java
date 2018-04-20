@@ -243,7 +243,7 @@ public class RecipeStepsDetailFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         if (savedInstanceState != null) {
             videoPlayerCurrentPosition = savedInstanceState.getInt(PLAYER_STATUE);
-            //exoPlayerPlayWhenReady = savedInstanceState.getBoolean(PLAYER_READY);
+            exoPlayerPlayWhenReady = savedInstanceState.getBoolean(PLAYER_READY);
         }
     }
 
@@ -306,7 +306,7 @@ public class RecipeStepsDetailFragment extends Fragment {
 
             // TODO 158 ) Preparing SimpleExoPlayer to set Play
             //exoPlayer.setPlayWhenReady(true);
-            exoPlayer.setPlayWhenReady(!exoPlayerPlayWhenReady);
+            exoPlayer.setPlayWhenReady(exoPlayerPlayWhenReady);
         }
     }
 
