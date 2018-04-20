@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.util.Util;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -128,6 +129,31 @@ public class RecipeStepsDetailFragment extends Fragment {
         // TODO 188 ) Defining thumbnailUrl
         thumbnailUrl = recipeStep.getThumbnailURL().trim();
 
+
+        if(!String.valueOf(videoUri).equals("")){
+            noImageAvailableImageView.setVisibility(View.GONE);
+            simpleExoPlayerView.setVisibility(View.VISIBLE);
+        }else{
+            noImageAvailableImageView.setVisibility(View.VISIBLE);
+            simpleExoPlayerView.setVisibility(View.GONE);
+
+            if(!String.valueOf(thumbnailUrl).equals("")){
+                Picasso.with(getContext())
+                        .load(String.valueOf(NetworkUtils.getBitmapFromURL(thumbnailUrl)))
+                        .placeholder(R.drawable.loading)
+                        .error(R.drawable.error)
+                        .into(noImageAvailableImageView);
+            }else{
+                Picasso.with(getContext())
+                        .load(String.valueOf(R.drawable.novideoavailable))
+                        .placeholder(R.drawable.loading)
+                        .error(R.drawable.error)
+                        .into(noImageAvailableImageView);
+            }
+        }
+
+
+        /*
         // TODO 189 ) Checking whether thumbnailUrl is empty or not
         if (String.valueOf(thumbnailUrl).equals("") && String.valueOf(videoUri).equals("")) {
             //simpleExoPlayerView.setDefaultArtwork(BitmapFactory.decodeResource
@@ -139,12 +165,13 @@ public class RecipeStepsDetailFragment extends Fragment {
             if (urlContentType != null && !urlContentType.isEmpty()) {
                 if (urlContentType.startsWith("image/")) {
                     simpleExoPlayerView.setDefaultArtwork(NetworkUtils.getBitmapFromURL(thumbnailUrl));
+                    //Picasso.get().load(String.valueOf(NetworkUtils.getBitmapFromURL(thumbnailUrl))).into(simpleExoPlayerView);
                 }
             }
             else {
                 hideSimpleExoPlayerView();
             }
-        }
+        }*/
 
         // TODO 190 ) Initialize the Media Session.
         ExpoMediaPlayerUtils.initializeMediaSession(getActivity(), exoPlayer);
