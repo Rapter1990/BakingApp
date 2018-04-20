@@ -306,7 +306,7 @@ public class RecipeStepsDetailFragment extends Fragment {
 
             // TODO 158 ) Preparing SimpleExoPlayer to set Play
             //exoPlayer.setPlayWhenReady(true);
-            exoPlayer.setPlayWhenReady(exoPlayerPlayWhenReady);
+            exoPlayer.setPlayWhenReady(!exoPlayerPlayWhenReady);
         }
     }
 
