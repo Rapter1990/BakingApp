@@ -228,9 +228,9 @@ public class RecipeStepsDetailFragment extends Fragment {
         // TODO 304 ) FEEDBACK 8 ) Because we wait we wait as long as possible until we grab resources Before API level 24, checking sdk then release ExpoPlayer
         if (Util.SDK_INT > 23) {
             if (exoPlayer != null) {
-                exoPlayerPlayWhenReady =exoPlayer.getPlayWhenReady();
+                //exoPlayerPlayWhenReady =exoPlayer.getPlayWhenReady();
                 //exoPlayer.setPlayWhenReady(false);
-                //exoPlayer.setPlayWhenReady(exoPlayerPlayWhenReady);
+                exoPlayer.setPlayWhenReady(exoPlayerPlayWhenReady);
             }
         }
         Timber.i("%s/n  onPause", LOG_TAG);
@@ -242,8 +242,8 @@ public class RecipeStepsDetailFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (savedInstanceState != null) {
-            //videoPlayerCurrentPosition = savedInstanceState.getInt(PLAYER_STATUE);
-            exoPlayerPlayWhenReady = savedInstanceState.getBoolean(PLAYER_READY);
+            videoPlayerCurrentPosition = savedInstanceState.getInt(PLAYER_STATUE);
+            //exoPlayerPlayWhenReady = savedInstanceState.getBoolean(PLAYER_READY);
         }
     }
 
