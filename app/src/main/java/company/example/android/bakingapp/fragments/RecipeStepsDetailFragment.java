@@ -245,11 +245,9 @@ public class RecipeStepsDetailFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        videoPlayerCurrentPosition = (int) C.TIME_UNSET;
         if (savedInstanceState != null) {
             videoPlayerCurrentPosition = savedInstanceState.getInt(PLAYER_STATUE);
             exoPlayerPlayWhenReady = savedInstanceState.getBoolean(PLAYER_READY);
-            videoPlayerCurrentPosition = savedInstanceState.getLong(SELECTED_POSITION, C.TIME_UNSET);
         }
     }
 
@@ -257,13 +255,12 @@ public class RecipeStepsDetailFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        int lastVideoPlayerCurrentPosition = (int) exoPlayer.getCurrentPosition();
-        outState.putInt(PLAYER_STATUE, lastVideoPlayerCurrentPosition);
+        videoPlayerCurrentPosition = exoPlayer.getCurrentPosition();
+        outState.putLong(PLAYER_STATUE, videoPlayerCurrentPosition);
 
         // TODO 299 ) FEEDBACK 3 ) Checkcing whether expoplayer get Play When it's ready
         //boolean exoPlayerPlayWhenReady = exoPlayer.getPlayWhenReady();
         outState.putBoolean(PLAYER_READY,exoPlayerPlayWhenReady);
-        outState.putLong(SELECTED_POSITION, videoPlayerCurrentPosition);
 
     }
 
@@ -305,8 +302,7 @@ public class RecipeStepsDetailFragment extends Fragment {
 
             // TODO 157 ) Checking whether SimpleExoPlayer is not null to deteriming its current position
         } else {
-            videoPlayerCurrentPosition = exoPlayer.getCurrentPosition();
-            if (videoPlayerCurrentPosition != C.TIME_UNSET) {
+            if (videoPlayerCurrentPosition != 0) {
                 exoPlayer.seekTo(videoPlayerCurrentPosition);
             } else {
                 exoPlayer.seekTo(0);
