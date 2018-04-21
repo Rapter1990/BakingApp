@@ -94,6 +94,7 @@ public class RecipeStepsDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
+
         // TODO 149 ) Determing the layout used to show fragment
         int layoutFragment = R.layout.recipe_steps_detail_fragment;
 
@@ -256,8 +257,9 @@ public class RecipeStepsDetailFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        long lastPosition = exoPlayer.getCurrentPosition();
-        outState.putLong(PLAYER_STATUE, lastPosition);
+
+        videoPlayerCurrentPosition  = exoPlayer.getCurrentPosition();
+        outState.putLong(PLAYER_STATUE, videoPlayerCurrentPosition);
 
         // TODO 299 ) FEEDBACK 3 ) Checkcing whether expoplayer get Play When it's ready
         //boolean exoPlayerPlayWhenReady = exoPlayer.getPlayWhenReady();
