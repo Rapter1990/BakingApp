@@ -233,6 +233,7 @@ public class RecipeStepsDetailFragment extends Fragment {
                 //exoPlayerPlayWhenReady =exoPlayer.getPlayWhenReady();
                 //exoPlayer.setPlayWhenReady(false);
                 exoPlayerPlayWhenReady = exoPlayer.getPlayWhenReady();
+                videoPlayerCurrentPosition = exoPlayer.getCurrentPosition();
                 exoPlayer = ExpoMediaPlayerUtils.releasePlayer(exoPlayer);
             }
 
