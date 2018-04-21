@@ -262,6 +262,7 @@ public class RecipeStepsDetailFragment extends Fragment {
         // TODO 299 ) FEEDBACK 3 ) Checkcing whether expoplayer get Play When it's ready
         //boolean exoPlayerPlayWhenReady = exoPlayer.getPlayWhenReady();
         outState.putBoolean(PLAYER_READY,exoPlayerPlayWhenReady);
+        outState.putLong(SELECTED_POSITION, videoPlayerCurrentPosition);
 
     }
 
