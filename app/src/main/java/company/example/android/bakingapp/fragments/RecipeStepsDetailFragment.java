@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.util.Util;
@@ -55,7 +56,7 @@ public class RecipeStepsDetailFragment extends Fragment {
     private SimpleExoPlayer exoPlayer;
 
     // TODO 146 ) Defining videoPlayerCurrentPosition to determine the current position of SimpleExoPlayer
-    private int videoPlayerCurrentPosition;
+    private long videoPlayerCurrentPosition;
 
     // TODO 147 ) Defining RecipeStep
     private RecipeStep recipeStep = null;
@@ -63,6 +64,7 @@ public class RecipeStepsDetailFragment extends Fragment {
     // TODO 161 ) Defining PLAYER_STATUE String variable to determine the current position of SimpleExoPlayer for Bundle
     private static final String PLAYER_STATUE = "player_current_position";
     private static final String PLAYER_READY ="player_ready";
+    private static final String SELECTED_POSITION ="player_selected_position";
 
     // TODO 185 ) Defining videoURL
     private Uri videoUri = null;
@@ -174,13 +176,13 @@ public class RecipeStepsDetailFragment extends Fragment {
         }*/
 
         // TODO 190 ) Initialize the Media Session.
-        ExpoMediaPlayerUtils.initializeMediaSession(getActivity(), exoPlayer);
+        /*ExpoMediaPlayerUtils.initializeMediaSession(getActivity(), exoPlayer);
         // TODO 191 ) Initialize the player.
         if (videoUri != null) {
             exoPlayer = ExpoMediaPlayerUtils.initializePlayer(videoUri, getActivity(), exoPlayer);
             simpleExoPlayerView.setPlayer(exoPlayer);
             Timber.d(LOG_TAG + " / Player initialized");
-        }
+        }*/
 
         return rootView;
     }
@@ -227,14 +229,13 @@ public class RecipeStepsDetailFragment extends Fragment {
     public void onPause() {
         super.onPause();
         // TODO 304 ) FEEDBACK 8 ) Because we wait we wait as long as possible until we grab resources Before API level 24, checking sdk then release ExpoPlayer
-        if (Util.SDK_INT <= 23) {
             if (exoPlayer != null) {
                 //exoPlayerPlayWhenReady =exoPlayer.getPlayWhenReady();
                 //exoPlayer.setPlayWhenReady(false);
                 exoPlayerPlayWhenReady = exoPlayer.getPlayWhenReady();
                 exoPlayer = ExpoMediaPlayerUtils.releasePlayer(exoPlayer);
             }
-        }
+
         Timber.i("%s/n  onPause", LOG_TAG);
     }
 
@@ -243,9 +244,11 @@ public class RecipeStepsDetailFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        videoPlayerCurrentPosition = (int) C.TIME_UNSET;
         if (savedInstanceState != null) {
             videoPlayerCurrentPosition = savedInstanceState.getInt(PLAYER_STATUE);
             exoPlayerPlayWhenReady = savedInstanceState.getBoolean(PLAYER_READY);
+            videoPlayerCurrentPosition = savedInstanceState.getLong(SELECTED_POSITION, C.TIME_UNSET);
         }
     }
 
@@ -300,7 +303,8 @@ public class RecipeStepsDetailFragment extends Fragment {
 
             // TODO 157 ) Checking whether SimpleExoPlayer is not null to deteriming its current position
         } else {
-            if (videoPlayerCurrentPosition != 0) {
+            videoPlayerCurrentPosition = exoPlayer.getCurrentPosition();
+            if (videoPlayerCurrentPosition != C.TIME_UNSET) {
                 exoPlayer.seekTo(videoPlayerCurrentPosition);
             } else {
                 exoPlayer.seekTo(0);
