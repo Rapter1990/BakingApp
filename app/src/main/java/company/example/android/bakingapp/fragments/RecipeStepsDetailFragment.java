@@ -220,8 +220,10 @@ public class RecipeStepsDetailFragment extends Fragment {
         Timber.i("%s/ onStop", LOG_TAG);
         // TODO 303 ) FEEDBACK 7 ) Because we wait we wait as long as possible until we grab resources Before API level 24, checking sdk then release ExpoPlayer
         if (Util.SDK_INT > 23) {
-            exoPlayerPlayWhenReady = exoPlayer.getPlayWhenReady();
-            exoPlayer = ExpoMediaPlayerUtils.releasePlayer(exoPlayer);
+            if (exoPlayer!=null) {
+                exoPlayerPlayWhenReady = exoPlayer.getPlayWhenReady();
+                exoPlayer = ExpoMediaPlayerUtils.releasePlayer(exoPlayer);
+            }
         }
     }
 
@@ -258,7 +260,7 @@ public class RecipeStepsDetailFragment extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        videoPlayerCurrentPosition  = exoPlayer.getCurrentPosition();
+        //videoPlayerCurrentPosition  = exoPlayer.getCurrentPosition();
         outState.putLong(PLAYER_STATUE, videoPlayerCurrentPosition);
 
         // TODO 299 ) FEEDBACK 3 ) Checkcing whether expoplayer get Play When it's ready
