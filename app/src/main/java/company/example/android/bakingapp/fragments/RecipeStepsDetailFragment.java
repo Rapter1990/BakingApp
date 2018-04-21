@@ -157,35 +157,6 @@ public class RecipeStepsDetailFragment extends Fragment {
 
 
 
-        /*
-        // TODO 189 ) Checking whether thumbnailUrl is empty or not
-        if (String.valueOf(thumbnailUrl).equals("") && String.valueOf(videoUri).equals("")) {
-            //simpleExoPlayerView.setDefaultArtwork(BitmapFactory.decodeResource
-                    //(getResources(), R.drawable.novideoavailable));
-            hideSimpleExoPlayerView();
-        }else{
-            // TODO 306 ) FEEDBACK 10 ) Checking whether thumbnailUrl is available from server or not
-            String urlContentType = NetworkUtils.getUrlContentType(thumbnailUrl);
-            if (urlContentType != null && !urlContentType.isEmpty()) {
-                if (urlContentType.startsWith("image/")) {
-                    simpleExoPlayerView.setDefaultArtwork(NetworkUtils.getBitmapFromURL(thumbnailUrl));
-                    //Picasso.get().load(String.valueOf(NetworkUtils.getBitmapFromURL(thumbnailUrl))).into(simpleExoPlayerView);
-                }
-            }
-            else {
-                hideSimpleExoPlayerView();
-            }
-        }*/
-
-        // TODO 190 ) Initialize the Media Session.
-        /*ExpoMediaPlayerUtils.initializeMediaSession(getActivity(), exoPlayer);
-        // TODO 191 ) Initialize the player.
-        if (videoUri != null) {
-            exoPlayer = ExpoMediaPlayerUtils.initializePlayer(videoUri, getActivity(), exoPlayer);
-            simpleExoPlayerView.setPlayer(exoPlayer);
-            Timber.d(LOG_TAG + " / Player initialized");
-        }*/
-
         return rootView;
     }
 
@@ -234,8 +205,6 @@ public class RecipeStepsDetailFragment extends Fragment {
         super.onPause();
         // TODO 304 ) FEEDBACK 8 ) Because we wait we wait as long as possible until we grab resources Before API level 24, checking sdk then release ExpoPlayer
             if (exoPlayer != null) {
-                //exoPlayerPlayWhenReady =exoPlayer.getPlayWhenReady();
-                //exoPlayer.setPlayWhenReady(false);
                 exoPlayerPlayWhenReady = exoPlayer.getPlayWhenReady();
                 videoPlayerCurrentPosition = exoPlayer.getCurrentPosition();
                 exoPlayer = ExpoMediaPlayerUtils.releasePlayer(exoPlayer);
@@ -260,29 +229,13 @@ public class RecipeStepsDetailFragment extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        //videoPlayerCurrentPosition  = exoPlayer.getCurrentPosition();
         outState.putLong(PLAYER_STATUE, videoPlayerCurrentPosition);
 
         // TODO 299 ) FEEDBACK 3 ) Checkcing whether expoplayer get Play When it's ready
-        //boolean exoPlayerPlayWhenReady = exoPlayer.getPlayWhenReady();
         outState.putBoolean(PLAYER_READY,exoPlayerPlayWhenReady);
 
     }
 
-    // TODO 208 ) Hiding SimpleExoPlayerView to show "NO Available Image"
-    public void hideSimpleExoPlayerView(){
-        simpleExoPlayerView.setVisibility(View.GONE);
-
-        //ImageView imageView = new ImageView(getActivity());
-        //imageView.setImageResource(R.drawable.novideoavailable);
-        //LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams
-        //        (LinearLayout.LayoutParams.MATCH_PARENT, 0,4);
-        //imageView.setLayoutParams(layoutParams);
-        //stepDetailLayout.addView(imageView);
-
-        noImageAvailableImageView.setVisibility(View.VISIBLE);
-
-    }
 
     // TODO 300 ) FEEDBACK 4 ) Creating initializeExpoPlayer method
     private void initializeExpoPlayer(){
@@ -313,7 +266,6 @@ public class RecipeStepsDetailFragment extends Fragment {
             }
 
             // TODO 158 ) Preparing SimpleExoPlayer to set Play
-            //exoPlayer.setPlayWhenReady(true);
             exoPlayer.setPlayWhenReady(exoPlayerPlayWhenReady);
 
     }
