@@ -296,13 +296,11 @@ public class RecipeStepsDetailFragment extends Fragment {
                 simpleExoPlayerView.setDefaultArtwork(BitmapFactory.decodeResource
                         (getResources(), R.drawable.novideoavailable));
             }
-
+        }
             // TODO 156 ) Setting SimpleExoPlayer to simpleExoPlayerView
             simpleExoPlayerView.setPlayer(exoPlayer);
 
             // TODO 157 ) Checking whether SimpleExoPlayer is not null to deteriming its current position
-        } //else {
-
             if (videoPlayerCurrentPosition != 0) {
                 exoPlayer.seekTo(videoPlayerCurrentPosition);
             } else {
@@ -313,8 +311,6 @@ public class RecipeStepsDetailFragment extends Fragment {
             //exoPlayer.setPlayWhenReady(true);
             exoPlayer.setPlayWhenReady(exoPlayerPlayWhenReady);
 
-
-        //}
     }
 
 }
