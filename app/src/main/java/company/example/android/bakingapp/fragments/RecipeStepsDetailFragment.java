@@ -56,7 +56,7 @@ public class RecipeStepsDetailFragment extends Fragment {
     private SimpleExoPlayer exoPlayer;
 
     // TODO 146 ) Defining videoPlayerCurrentPosition to determine the current position of SimpleExoPlayer
-    private long videoPlayerCurrentPosition;
+    private Long videoPlayerCurrentPosition;
 
     // TODO 147 ) Defining RecipeStep
     private RecipeStep recipeStep = null;
@@ -155,6 +155,7 @@ public class RecipeStepsDetailFragment extends Fragment {
         }
 
 
+
         /*
         // TODO 189 ) Checking whether thumbnailUrl is empty or not
         if (String.valueOf(thumbnailUrl).equals("") && String.valueOf(videoUri).equals("")) {
@@ -246,7 +247,7 @@ public class RecipeStepsDetailFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (savedInstanceState != null) {
-            videoPlayerCurrentPosition = savedInstanceState.getInt(PLAYER_STATUE);
+            videoPlayerCurrentPosition = savedInstanceState.getLong(PLAYER_STATUE);
             exoPlayerPlayWhenReady = savedInstanceState.getBoolean(PLAYER_READY);
         }
     }
@@ -301,7 +302,7 @@ public class RecipeStepsDetailFragment extends Fragment {
             simpleExoPlayerView.setPlayer(exoPlayer);
 
             // TODO 157 ) Checking whether SimpleExoPlayer is not null to deteriming its current position
-            if (videoPlayerCurrentPosition != 0) {
+            if (videoPlayerCurrentPosition != null) {
                 exoPlayer.seekTo(videoPlayerCurrentPosition);
             } else {
                 exoPlayer.seekTo(0);
