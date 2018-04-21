@@ -301,7 +301,8 @@ public class RecipeStepsDetailFragment extends Fragment {
             simpleExoPlayerView.setPlayer(exoPlayer);
 
             // TODO 157 ) Checking whether SimpleExoPlayer is not null to deteriming its current position
-        } else {
+        } //else {
+
             if (videoPlayerCurrentPosition != 0) {
                 exoPlayer.seekTo(videoPlayerCurrentPosition);
             } else {
@@ -311,7 +312,9 @@ public class RecipeStepsDetailFragment extends Fragment {
             // TODO 158 ) Preparing SimpleExoPlayer to set Play
             //exoPlayer.setPlayWhenReady(true);
             exoPlayer.setPlayWhenReady(exoPlayerPlayWhenReady);
-        }
+
+
+        //}
     }
 
 }
