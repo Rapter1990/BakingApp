@@ -255,8 +255,8 @@ public class RecipeStepsDetailFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        videoPlayerCurrentPosition = exoPlayer.getCurrentPosition();
-        outState.putLong(PLAYER_STATUE, videoPlayerCurrentPosition);
+        long lastPosition = exoPlayer.getCurrentPosition();
+        outState.putLong(PLAYER_STATUE, lastPosition);
 
         // TODO 299 ) FEEDBACK 3 ) Checkcing whether expoplayer get Play When it's ready
         //boolean exoPlayerPlayWhenReady = exoPlayer.getPlayWhenReady();
